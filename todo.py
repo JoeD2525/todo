@@ -7,3 +7,8 @@ def list_tasks(tasks):
         mark = "x" if task["done"] else " "
         lines.append(f"{number}. [{mark}] {task['title']}")
     return lines
+
+def done_task(tasks, number):
+    new_tasks = [dict(task) for task in tasks]
+    new_tasks[number - 1]["done"] = True
+    return new_tasks
