@@ -9,6 +9,8 @@ def list_tasks(tasks):
     return lines
 
 def done_task(tasks, number):
+    if number > len(tasks):
+        raise ValueError(f"No task number {number}")
     new_tasks = [dict(task) for task in tasks]
     new_tasks[number - 1]["done"] = True
     return new_tasks

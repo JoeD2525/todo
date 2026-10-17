@@ -1,3 +1,5 @@
+140 lights down
+
 shower
 out
 direct contact to people
@@ -16,7 +18,6 @@ todo add "buy milk", todo list, todo done 1. It's about 30 lines of Python, save
 
 Requirements: write three one-line user stories, so we know what "done" means.
 Environment: terminal, Python, a virtual environment.
-
 Version control: git init, then small commits with clear messages.
 Code: I'll write it with you, and you'll read every line so you can explain it.
 Tests: pytest, with a test written before the feature (the TDD loop).
@@ -26,7 +27,7 @@ CI: a GitHub Actions file that runs your tests and linter on every push.
 Packaging and release: make it installable, tag v0.1.0, write a README.
 Maintenance: I'll introduce a bug, you file an issue, write a failing test and fix it.
 
-
+????NEED LICENSE IN ADDITION TO READ ME FIRST/ENVIRONMENT/GIT IGNORE ETC?
 
 REQUIREMENTS
 1 Create README.md in project folder
@@ -56,7 +57,7 @@ ENVIRONMENT
 5 create isolated environment empty. we will add packages with pip , for dependencies need.
  create python environment: python -m venv .venv
  -m means run as module, venv is the program, .venv is the folder creating
- activate environment: .venv\Scrips\Activate.ps1
+ activate environment: .venv\Script	s\Activate.ps1
  -there may be error due to powershells execution policy. default it's set to restricted. so blocks running scripts. 
     -to fix this error: Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
     -remotsigned = local scripts can run, but downloaded scripts must be digitally signed
@@ -69,12 +70,12 @@ ENVIRONMENT
    -vm runs whole separate OS with own kernel (GB)
      -starts in minutes
 VERSION CONTROL
-7 .gitignore set to skip the .venv folder. PUSHED TO GITHUB, HARD TO TAKE BACK.
+7 .gitignore set to skip the .venv folder. PUSHED TO GITHUB, HARD TO TAKE BACK. (gitignore is so that never commit secrets, dependencies, and build)
    -it contains file paths to show what to not commit. can specify a folder, or specify a file. *.jpg will skip every file ending in .jpg
      /hello.jpg skips hello .jpg in that root folder only. / is a leading slash
      build/ trailing slash, ignores anything in that folder.
   -create gitignore file outside the .git folder in main folder: notepad .gitignore
-  -.venv is large(1000s files) bloats repo
+  -.venv is large(1000s files) bloats repo so put in .gitignore
      -grows by 10MB and every clone downloads it. Is that really high memory?
      -broken on other machines: .venv has paths & binaries tied to users specific windows set up. so won't work on someone's computer / CI
      -noisy: every package install / upgrades are 100s of changes in the repo. buries users small amount of changes
@@ -84,6 +85,7 @@ VERSION CONTROL
   -GENEREAL GIT RULE:commit what you write, ignore what's generated.
 8. make your first commit. snapshot, so can return to if something break
  - git add stages, git commit snapshots so can return if need
+   -starts file being tracked
  - move all new and changed files in current folder, into staging area: git add . 
    -staging area is so can choose what to commit snapshot. eg if fixed by a bug, but also created a new feature. can just commit only the bug. 
    -lets us review before saving/committing
@@ -113,15 +115,94 @@ VERSION CONTROL
        -By far the most common is 100644 (regular file). You'll see it on nearly every file you ever commit.
        -100755: executable file (shell scripts and similar), fairly common on Mac/Linux projects
       -100755 . '' and 755 = executable file
-       
-  
-
  -git branch lists all branches of repo currently in. * is branch you currently in
   -each repo has a master branch
   -git status also shows current repo
-   
+ -git log --oneline: to quickly answer what happened in this project
+  -prints  commit history 
+  -to find bad changes
+  -to see what was done recently before start again.
+  - like a changelog = see whats new before pulling new, or see what happeend to diagnose.
+  
+CODE WITH TDD (test driven development)
+1 install pytest . w/ venva active
+ - pip install pytest
+   -finds and runs our tests, checks asseert statements, reports pass ..or fail.
+   -sets up code for tests
+   -parametrizes: run same tests with different inputs
+2 creat file that will fail(proves test can catch missing or wrong feature)(red stepping)
+  from todo import add_task
+  def test_add_task():
+    assert add_task([], "buy milk") == [{"title": "buy milk", "done": False}]
+  "test" in file name is how pytest finds to open that file
+  "test" in function name is how pytest finds  to run that function 
+3 run pytest on it to ssee it fail (red stepping). test if test works correctly
+  python -m pytest
+  Expected: it fails with ModuleNotFoundError: No module named 'todo'. That’s the “red” step, since todo.py doesn’t exist yet.
+4 green stepping. smallest code that makes it pass.
+ create todo.py in same folder
+ put this code in the folder
+   def add_task(tasks, title):
+      return tasks + [{"title": title, "done": False}]
+ python -m pytose again
+ it passes with green
+5 refactor
+ -code is already minimal
+ ?future can go through process where refactor?
+7 add and commit
+  git add test_todo.py todo.py  ? commiting partially?
+  git commit -m "Add add_task with test". snapshot of whole project.
+    OUTPUT OF THIS COMMAND
+    new files created, are not tracked until add to staging area
+        Untracked files: (use "git add <file>..." to include in what will be committed)
+        list_tasks.py
+        test_todo.py
+        todo-learning-steps.xlsx
+        todo.py
+  
+  git log --oneline   
+      OUTPUT OF THIS COMMAND
+      899461e (HEAD -> master) Add add_task with test
+      cd1dbff changed README & notes-learning-swe
+      58f27cb Add README, gitignore, & notes-learning-swe 
 
- - make snaphot: git commit
+      HEAD -> master means we are in master branch
+      HEAD points to where are now and what commit pointing too    
+
+8 red step again: add another feature to program with list of tasks added
+     def test_list_tasks():
+        tasks = [{"title": "buy milk", "done": False}]
+        assert list_tasks(tasks) == ["1. [ ] buy milk"]
+9 red step again: python -m pytest
+     failed same way again. list_task doesn't exist yet
+     failed shows color all red
+10 there is something still that is passing but it is not catching it
+    it's not catching . red step again
+11 red step: 
+   add a third tes function in test_todo.py
+   add this (below)
+   def test_list_tasks_done():
+    tasks = [{"title": "a", "done": True}, {"title": "b", "done": False}]
+    assert list_tasks(tasks) == ["1. [x] a", "2. [ ] b"]
+
+12 run python -m pytest
+   should see 1 failed, 2 passe
+14 commit again
+   tests and code are both usually committed
+15 add import of function done_tasks that does not exists
+
+17 it fails under pytest b/c it does not exist
+
+18 add done_task to todo.py so now it exists
+
+19 test edge cases
+   -access 5th task to set to true, but only one task in list of tasks
+   -we test if a ValueError is raised. valueerror means value is right type, but wrong value
+    -fails b/c returns index error and not valueerror
+     -valueerror looks at type and value
+
+20 SIDE NOTE. CYCLE WE ARE DOING IS. CREATE FILE, CREATE TEST THAT BREAKS, FIX IT, THEN ADD AND COMMITT.
+
 CODE
 TESTS
 LINTING & FORMATTTING
@@ -137,13 +218,59 @@ repository: whole collection of commits. full history. hidden in .git folder
 
 
 side notes
+-git is working with changing files granularly
 -fork is just copy online repo to repo. clone downloads copy to local repo
 -run as program.py just runs in interpreter but need give file pytho
 -run as module, just give the name and python searches for it's location
 -import, loads their code in our code so can call their code. their internal code stays where it is.
 -cache folders: __pycache__ has .pyc files. pyc is code pre-translated into faster form (bytecode). auto generated by python when we need them. differ by python version and machine so many noisy changes.
+-python: enumerate() loops over iterable and gives you (index, item) pairs, = position and v
+-git add starts file being tracked
+-commmit is snapshot of whole project. not just the files that committed.
+-git restore: undoes recent uncommited changes in working directory
+ -restore only changed files
+-git revert: doesn't go back to a previous commit. result looks like older state, but recorded as a new commit.
+ -makes a new commit , that undoes changes of commit you pick. 
+-git reset, erases, unlike revert
+ -go back to version 2 commit, and remove version 3 from branch history. 
+ -not safe after pushing
+-git diff compares only tracked files
+ -statuses of files
+  -untracked-not in staging area
+  -staged - in stagine area
+  -unmodified - in stage, hasn't changed since the last commit
+  -modified-  in stage, changed since last commit
+  -committed-photo of everything on the table
+-git push only sends commits, and not working folder
+ -if never staged a file in project, then commit and push, that file will be missing from the project
+-Remove-Item vs remdir. Remove-Item to delete file. ?
+-git add and commit are both snapshots of file.
+ -if add file to stage, then change in working directory, have to add it again.
+-pytest can test if it's a certain type of error, from an exception. 
+ -eg valueerror looking for then passees if it is one. if another error type, then false
+     eg pytest can use "with pytest.raises(ValueError):"
+       -"with" automicac gaurantees cleanup of outside resources. eg open file or connection
+         -open and close is manual.
+         -clean up code was manual f= open , f= close. easy to forget. with is automatic
+         -also error between open and close, close no run or clean up, leave file open.
+         -try /finally can help, but long and repetitive.
+       -with can use with opening files, testing errors raised, db and network connection 
+        -used withlocks and threads, temp files and folders, mocks and patches in tests
+       -to use with, only works with objects that specify use in it's definition?
+       -no use "with, if resource stays open beyone one block.
+        -eg file /connection kept open for whole program and passed around
+    
 
 
 
 questions
 -what is a cmdlet?. verb noun pattern?
+-workflow is edit, then test before stage, during stage, or before committ?
+-how do they check in remotre repo, before accepting merge request?
+
+
+
+
+
+
+

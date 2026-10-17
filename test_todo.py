@@ -1,4 +1,5 @@
 from todo import add_task, list_tasks, done_task
+import pytest
 
 def test_add_task():
     assert add_task([], "buy milk") == [{"title": "buy milk", "done": False}]
@@ -14,3 +15,10 @@ def test_list_tasks_done():
 def test_done_task():
     tasks = [{"title": "buy milk", "done": False}]
     assert done_task(tasks, 1) == [{"title": "buy milk", "done": True}]
+
+def test_done_task_bad_number():
+    with pytest.raises(ValueError):
+        done_task([{"title": "a", "done": False}],5)
+
+
+    #why pass [] along with buy milk
