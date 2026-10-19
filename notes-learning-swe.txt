@@ -259,7 +259,19 @@ side notes
        -to use with, only works with objects that specify use in it's definition?
        -no use "with, if resource stays open beyone one block.
         -eg file /connection kept open for whole program and passed around
-    
+-if git add, then change working directory file, need to git add again. same for commit?
+-comparing. eg diff, git status, git log, git show, git blame
+ -categories
+  -working v staged
+  -staged v committed
+  -working v committed
+
+ -comparing two points in history
+  -committ vs committ
+  -previous committ vs latest
+  -branch vs branch
+  -two files directly
+  -one file only 
 
 
 
