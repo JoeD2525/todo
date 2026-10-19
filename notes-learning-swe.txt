@@ -201,7 +201,7 @@ CODE WITH TDD (test driven development)
     -fails b/c returns index error and not valueerror
      -valueerror looks at type and value
 
-20 SIDE NOTE. CYCLE WE ARE DOING IS. CREATE FILE, CREATE TEST THAT BREAKS, FIX IT, THEN ADD AND COMMITT.
+20 SIDE NOTE. CYCLE WE ARE DOING IS. CREATE FILE, CREATE TEST THAT BREAKS(red step), FIX IT(green step), ?refactor?, GIT STATUS, THEN ADD AND COMMITT.
 
 CODE
 TESTS
