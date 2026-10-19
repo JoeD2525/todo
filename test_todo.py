@@ -24,6 +24,9 @@ def test_done_task_zero():
     with pytest.raises(ValueError):
         done_task([{"title": "a", "done": False}],0)
 
+def test_list_tasks_empty():
+    assert list_tasks([]) == []
+
 
 
     #why pass [] along with buy milk

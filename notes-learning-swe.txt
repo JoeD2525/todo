@@ -202,6 +202,8 @@ CODE WITH TDD (test driven development)
      -valueerror looks at type and value
 
 20 SIDE NOTE. CYCLE WE ARE DOING IS. CREATE FILE, CREATE TEST THAT BREAKS(red step), FIX IT(green step), ?refactor?, GIT STATUS, THEN ADD AND COMMITT.
+21 list task edge case
+  -can write tests before fix them. red testing. so testing the test and testing the code.
 
 CODE
 TESTS
@@ -273,6 +275,7 @@ side notes
   -two files directly
   -one file only 
 -we can test that conditions are working. eg test raisvaluerror exception.
+-can test the test that wrote . red testing. seeing the test fail first, proves test can catch the problem. 
 
 
 questions
