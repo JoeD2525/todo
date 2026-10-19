@@ -20,5 +20,10 @@ def test_done_task_bad_number():
     with pytest.raises(ValueError):
         done_task([{"title": "a", "done": False}],5)
 
+def test_done_task_zero():
+    with pytest.raises(ValueError):
+        done_task([{"title": "a", "done": False}],0)
+
+
 
     #why pass [] along with buy milk

@@ -272,7 +272,7 @@ side notes
   -branch vs branch
   -two files directly
   -one file only 
-
+-we can test that conditions are working. eg test raisvaluerror exception.
 
 
 questions
