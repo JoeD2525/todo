@@ -205,6 +205,51 @@ CODE WITH TDD (test driven development)
 21 list task edge case. check if returns [] if no tasks in list
   -can write tests before fix them. red testing. so testing the test and testing the code.
 22 save dependencies (requirements.txt) so other people can rebuild same enviornment with pip install -r requirements.txt
+  -pip freeze > requirements.txt to save dependencies
+23 linting (circlular repeated steps until all good)
+   -pip install ruff
+   -ruff check .
+    -look for likely mistakes(unused importns, undefined names) in every python
+      file in the current folder. reads code without running it.
+   -ruff format --check
+      -check adheres to PEP8 style format
+      -lists files style should change
+   -ruff format .
+    -output 
+       -2 files reformatted, 2 files left unchanged
+   -python -m pytest
+    -test
+   -ruff format --check .
+    -check format again
+   -ruff check .
+  -tests only check custom checks you wrote
+  -linting spots a whole class of mistakes before running anything?
+  -catches some run time possible errors
+   ?ask what types of errors doesn't check?
+  -linting keeps code consistent, so reviews can focus on logic instead of stye
+  -it is fast. replaced what used to take several tools (flake8, isort, black)
+  -overall
+   -compiler tests syntax
+   -linter tests likely mistaks
+   -type checker tests type mismatches
+   -tests, test the most run time errors
+  
+   -git add test_todo.py todo.py
+   -git commit -m "Format and lint code with ruff"
+
+   -pip freeze | Out-File -Encoding ascii requirements.txt
+    # adding ruff to requirements. by freezing our current dependencies and putting into 
+      requirements.txt
+    # "-Encoding" is controlling the encoding because we had an encoding descrepany with binary I believe.
+   -git add requirements.txt
+   -git commit -m "Add ruff to requirements"
+
+   -git status
+   
+
+   -additional note: "|"  hands output to next command insteaed of printing
+
+
 
 CODE
 TESTS
