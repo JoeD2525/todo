@@ -202,8 +202,9 @@ CODE WITH TDD (test driven development)
      -valueerror looks at type and value
 
 20 SIDE NOTE. CYCLE WE ARE DOING IS. CREATE FILE, CREATE TEST THAT BREAKS(red step), FIX IT(green step), ?refactor?, GIT STATUS, THEN ADD AND COMMITT.
-21 list task edge case
+21 list task edge case. check if returns [] if no tasks in list
   -can write tests before fix them. red testing. so testing the test and testing the code.
+22 save dependencies (requirements.txt) so other people can rebuild same enviornment with pip install -r requirements.txt
 
 CODE
 TESTS
