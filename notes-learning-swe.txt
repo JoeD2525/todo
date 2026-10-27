@@ -248,7 +248,7 @@ CODE WITH TDD (test driven development)
    
 
    -additional note: "|"  hands output to next command insteaed of printing
-
+   
 
 
 CODE
@@ -322,6 +322,8 @@ side notes
   -one file only 
 -we can test that conditions are working. eg test raisvaluerror exception.
 -can test the test that wrote . red testing. seeing the test fail first, proves test can catch the problem. 
+-Get-Content requirements.txt to show contents of file
+-notepad requirements.txt to open notepad
 
 
 questions
