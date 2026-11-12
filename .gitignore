@@ -3,3 +3,6 @@ __pycache__/
 notes/
 notes-learning-swe.md
 Software_Requirements_Categories.*
+dist/
+build
+*.egg-info/
