@@ -16,3 +16,7 @@ WHAT USUALLY GOES IN A READ.MD
 4 how to run the tests
 5 where to find more documents and how to contribute
 7 the license
+
+
+## Usage
+Run the tests with: python -m pytest
