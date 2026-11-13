@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "todo-learning"
-version = "0.1.1"
+version = "0.1.0"
 description = "A minimal to-do app built to learn software engineering"
 readme = "README.md"
 requires-python = ">=3.10"
