@@ -36,3 +36,16 @@ def test_list_tasks_empty():
     assert list_tasks([]) == []
 
     # why pass [] along with buy milk
+
+
+# MAINTENANCE TASKS AFTER FOUND BUG
+
+
+def test_add_task_empty_title():
+    with pytest.raises(ValueError):
+        add_task([], "")
+
+
+def test_add_task_blank_title():
+    with pytest.raises(ValueError):
+        add_task([], "   ")
